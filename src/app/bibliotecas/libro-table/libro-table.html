@@ -1,0 +1,39 @@
+<section class="box">
+  <h2>Libros por Biblioteca</h2>
+
+  @switch (status()) {
+    @case ('loading') {
+      <p>Cargando...</p>
+    }
+    @case ('error') {
+      <p>{{ message() }}</p>
+      <button (click)="load()">Reintentar</button>
+    }
+    @case ('success') {
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Año</th>
+            <th>Biblioteca</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (libro of libros(); track libro.id) {
+            <tr>
+              <td>{{ libro.titulo }}</td>
+              <td>{{ libro.autor }}</td>
+              <td>{{ libro.añoPublicacion }}</td>
+              <td>{{ libro.bibliotecaNombre }}</td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4">Sin registros.</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+</section>
